@@ -1,11 +1,9 @@
-
 #include <iostream>
 #include <string>
 #include <limits>
 #include <iomanip>
 using namespace std;
 
-// Base class
 class Vehicle {
 private:
     string vehicleID;
@@ -13,14 +11,13 @@ private:
     int rentalDuration;
 
 public:
-    // Constructor
+ 
     Vehicle(string id, string m, int duration) {
         vehicleID = id;
         model = m;
         rentalDuration = duration;
     }
 
-    // Getter functions
     string getVehicleID() const {
         return vehicleID;
     }
@@ -33,21 +30,19 @@ public:
         return rentalDuration;
     }
 
-    // Virtual functions
     virtual double calculateRentalCharge() const = 0;
 
     virtual void displayDetails() const {
         cout << "\nVehicle ID       : " << vehicleID;
         cout << "\nModel            : " << model;
         cout << "\nRental Duration  : "
-             << rentalDuration << " hour(s)";
+             << rentalDuration << " hour";
     }
 
-    // Virtual destructor
     virtual ~Vehicle() {}
 };
 
-// Derived class: Car
+
 class Car : public Vehicle {
 private:
     double ratePerHour;
@@ -55,16 +50,14 @@ private:
 public:
     Car(string id, string m, int duration)
         : Vehicle(id, m, duration) {
-        ratePerHour = 500.0;
+        ratePerHour = 600.0;
     }
 
-    // Function overriding
     double calculateRentalCharge() const override {
         return ratePerHour * getRentalDuration();
     }
 
     void displayDetails() const override {
-        cout << "\n--- CAR RENTAL DETAILS ---";
         Vehicle::displayDetails();
         cout << "\nRate Per Hour    : Rs. "
              << ratePerHour;
@@ -73,7 +66,7 @@ public:
     }
 };
 
-// Derived class: Bike
+
 class Bike : public Vehicle {
 private:
     double ratePerHour;
@@ -81,16 +74,14 @@ private:
 public:
     Bike(string id, string m, int duration)
         : Vehicle(id, m, duration) {
-        ratePerHour = 150.0;
+        ratePerHour = 300.0;
     }
 
-    // Function overriding
     double calculateRentalCharge() const override {
         return ratePerHour * getRentalDuration();
     }
 
     void displayDetails() const override {
-        cout << "\n--- BIKE RENTAL DETAILS ---";
         Vehicle::displayDetails();
         cout << "\nRate Per Hour    : Rs. "
              << ratePerHour;
@@ -106,9 +97,6 @@ int main() {
 
     cout << fixed << setprecision(2);
 
-    cout << "================================\n";
-    cout << "      VEHICLE RENTAL SYSTEM\n";
-    cout << "================================\n";
 
     while (true) {
         cout << "\n1. Rent a Car";
@@ -124,7 +112,7 @@ int main() {
         }
 
         if (choice == 3) {
-            cout << "\nThank you for using our system!\n";
+            cout << "\nThank you!\n";
             break;
         }
 
@@ -153,7 +141,6 @@ int main() {
             continue;
         }
 
-        // Base-class pointer for runtime polymorphism
         Vehicle* vehicle = nullptr;
 
         if (choice == 1) {
